@@ -1,0 +1,38 @@
+name: "techunico-prettier-config"
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    name: prettier-config-release
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v2.1.1
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          registry-url: 'https://registry.npmjs.org'
+      - name:  'Automated Version Bump'
+        uses:  'phips28/gh-action-bump-version@master'
+        env:
+          GITHUB_TOKEN: ${{ secrets.PRETTIER_TOKEN }}
+        with:
+          minor-wording:  'add,Adds,new'
+          major-wording:  'MAJOR,cut-major'
+          patch-wording:  'patch,fixes'     # Providing patch-wording will override commits
+                                      # defaulting to a patch bump.
+          rc-wording:     'RELEASE,alpha'
+          PACKAGEJSON_DIR:  'prettier-config'
+          
+      - name: publish
+#       - run: npm ci
+#       - run: npm publish
+        run: npm publish --access public
+        working-directory: ./prettier-config
+        env:
+          GITHUB_TOKEN: ${{ secrets.PRETTIER_TOKEN }}
+          NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
