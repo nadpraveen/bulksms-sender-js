@@ -1,4 +1,4 @@
-name: "techunico-prettier-config"
+name: "techunico-bulk-sms-sender"
 
 on:
   push:
@@ -7,7 +7,7 @@ on:
 
 jobs:
   release:
-    name: prettier-config-release
+    name: techunico-bulk-sms-sender
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -26,13 +26,12 @@ jobs:
           patch-wording:  'patch,fixes'     # Providing patch-wording will override commits
                                       # defaulting to a patch bump.
           rc-wording:     'RELEASE,alpha'
-          PACKAGEJSON_DIR:  'prettier-config'
           
       - name: publish
 #       - run: npm ci
 #       - run: npm publish
         run: npm publish --access public
-        working-directory: ./prettier-config
+        working-directory: ./
         env:
           GITHUB_TOKEN: ${{ secrets.PRETTIER_TOKEN }}
           NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
