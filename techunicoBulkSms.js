@@ -16,4 +16,4 @@ async function sendSingleSms(smsPayload){
     });
 }
 
-export default sendSingleSms = sendSingleSms;
+export {sendSingleSms} ;
