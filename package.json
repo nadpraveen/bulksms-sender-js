@@ -1,7 +1,7 @@
 {
   "type": "module",
   "name": "techunico-bulk-sms-sender",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "This is SMS sending library for Techunico",
   "main": "techunicoBulkSms.js",
   "scripts": {
